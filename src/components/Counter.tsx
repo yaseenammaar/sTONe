@@ -12,34 +12,17 @@ import {
 
 export function Counter() {
   const { connected } = useTonConnect();
-  const { value, address, sendIncrement } = useCounterContract();
+  const { value, address, sendIncrement, balance } = useCounterContract(); // assuming `balance` is added to `useCounterContract` hook
 
   return (
-    <div className="Container">
+    <div className="container">
       <TonConnectButton />
-
-      <Card>
-        <FlexBoxCol>
-          <h3>Counter</h3>
-          <FlexBoxRow>
-            <b>Address</b>
-            <Ellipsis>{address}</Ellipsis>
-          </FlexBoxRow>
-          <FlexBoxRow>
-            <b>Value</b>
-            <div>{value ?? "Loading..."}</div>
-          </FlexBoxRow>
-          <Button
-            disabled={!connected}
-            className={`Button ${connected ? "Active" : "Disabled"}`}
-            onClick={() => {
-              sendIncrement();
-            }}
-          >
-            Increment
-          </Button>
-        </FlexBoxCol>
-      </Card>
+      {connected && (
+        <div className="content">
+          <div className="balance">Balance: {balance} TON</div>
+          <Button onClick={sendIncrement}>Increment</Button>
+        </div>
+      )}
     </div>
   );
 }

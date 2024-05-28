@@ -1,13 +1,14 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { TonConnectButton } from "@tonconnect/ui-react";
-import { Counter } from "./components/Counter";
-import { Jetton } from "./components/Jetton";
-import { TransferTon } from "./components/TransferTon";
 import styled from "styled-components";
 import { Button, FlexBoxCol, FlexBoxRow } from "./components/styled/styled";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
+import HomeScreen from "./components/HomeScreen";
+import DepositScreen from "./components/DepositScreen";
+import GameScreen from "./components/GameScreen";
 
 const StyledApp = styled.div`
   background-color: #e8e8e8;
@@ -26,8 +27,26 @@ const AppContainer = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
+const App: React.FC = () => {
   const { network } = useTonConnect();
+  const [isConnected, setIsConnected] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState<"home" | "deposit" | "game">("home");
+
+  useEffect(() => {
+    setIsConnected(!!network);
+  }, [network]);
+
+  const handlePlayClick = () => {
+    setCurrentScreen("deposit");
+  };
+
+  const handleDepositClick = () => {
+    setCurrentScreen("game");
+  };
+
+  const handleBackToHome = () => {
+    setCurrentScreen("home");
+  };
 
   return (
     <StyledApp>
@@ -43,13 +62,13 @@ function App() {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
-          <Counter />
-          <TransferTon />
-          <Jetton />
+          {currentScreen === "home" && <HomeScreen isConnected={isConnected} onPlayClick={handlePlayClick} />}
+          {currentScreen === "deposit" && <DepositScreen onDepositClick={handleDepositClick} />}
+          {currentScreen === "game" && <GameScreen onBackToHome={handleBackToHome} />}
         </FlexBoxCol>
       </AppContainer>
     </StyledApp>
   );
-}
+};
 
 export default App;
