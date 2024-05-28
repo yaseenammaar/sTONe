@@ -68,8 +68,9 @@ const GameScreen: React.FC<GameScreenProps> = ({ onBackToHome }) => {
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   const choices = ["rock", "paper", "scissors"];
-  const choiceEmojis = { rock: "✊", paper: "✋", scissors: "✌️" };
-  const resultEmojis = { win: "😃", lose: "😢" };
+  const choiceEmojis: Record<string, string> = { rock: "✊", paper: "✋", scissors: "✌️" };
+  const resultEmojis: Record<string, string> = { win: "😃", lose: "😢" };
+  
 
   const handleEmojiClick = (playerChoice: string) => {
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
