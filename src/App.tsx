@@ -10,6 +10,12 @@ import HomeScreen from "./components/HomeScreen";
 import DepositScreen from "./components/DepositScreen";
 import GameScreen from "./components/GameScreen";
 
+// Define the type for HomeScreenProps
+type HomeScreenProps = {
+  isConnected: boolean; // Define isConnected property
+  onPlayClick: () => void;
+};
+
 const StyledApp = styled.div`
   background-color: #e8e8e8;
   color: black;
@@ -62,6 +68,7 @@ const App: React.FC = () => {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
+          {/* Pass isConnected and onPlayClick to HomeScreen */}
           {currentScreen === "home" && <HomeScreen isConnected={isConnected} onPlayClick={handlePlayClick} />}
           {currentScreen === "deposit" && <DepositScreen onDepositClick={handleDepositClick} />}
           {currentScreen === "game" && <GameScreen onBackToHome={handleBackToHome} />}

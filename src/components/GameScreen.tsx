@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "./styled/styled";
 
-
 const GameScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,13 +13,6 @@ const GameScreenContainer = styled.div`
 const EmojiButton = styled(Button)`
   font-size: 50px;
   margin: 20px;
-  font-family: inherit; /* Use the same font as the parent */
-`;
-
-const Title = styled.h1`
-  font-size: 16px; /* Adjust as needed */
-  font-family: inherit; /* Use the same font as the parent */
-  font-weight: bold; /* Ensure the font weight matches */
 `;
 
 const ResultContainer = styled.div`
@@ -53,7 +45,6 @@ const OpponentChoiceBox = styled(ChoiceBox)`
 const ResultText = styled.div`
   font-size: 24px;
   margin-top: 20px;
-  font-family: inherit; /* Use the same font as the parent */
 `;
 
 const BackButton = styled(Button)`
@@ -61,12 +52,15 @@ const BackButton = styled(Button)`
   width: 150px;
   height: 40px;
   font-size: 16px;
-  font-family: inherit; /* Use the same font as the parent */
 `;
 
 const prizeAmount = 1.8;
 
-const GameScreen: React.FC<{ onBackToHome: () => void }> = ({ onBackToHome }) => {
+interface GameScreenProps {
+  onBackToHome: () => void;
+}
+
+const GameScreen: React.FC<GameScreenProps> = ({ onBackToHome }) => {
   const [result, setResult] = useState<string | null>(null);
   const [playerChoice, setPlayerChoice] = useState<string | null>(null);
   const [computerChoice, setComputerChoice] = useState<string | null>(null);
