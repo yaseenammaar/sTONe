@@ -70,7 +70,7 @@ const App: React.FC = () => {
           </FlexBoxRow>
           {/* Pass isConnected and onPlayClick to HomeScreen */}
           {currentScreen === "home" && <HomeScreen isConnected={isConnected} onPlayClick={handlePlayClick} />}
-          {currentScreen === "deposit" && <DepositScreen onDepositClick={handleDepositClick} />}
+          {currentScreen === "deposit" && <DepositScreen isConnected={isConnected} onDepositClick={handleDepositClick} />}
           {currentScreen === "game" && <GameScreen onBackToHome={handleBackToHome} />}
         </FlexBoxCol>
       </AppContainer>
