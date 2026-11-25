@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Sniff Labs LLC. All rights reserved.
 import axios from "axios";
 import { createInterface } from "readline";
 import fs from "fs";
